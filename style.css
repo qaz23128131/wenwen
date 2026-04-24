@@ -508,8 +508,8 @@ body {
     width: 100%;
     height: 100dvh;
     background-image: url('room_bg.png');
-    background-position: 95% center;
-    /* 讓書桌完全露出來，熊熊靠左邊緣 */
+    background-position: 2% center;
+    /* 向左對齊，確保熊靠在最左邊且整隻出現 */
     background-size: cover;
     background-repeat: no-repeat;
     max-width: 500px;
@@ -518,45 +518,42 @@ body {
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.5) inset;
 }
 
-/* 互動點重新對位 (配合 95% 背景) */
+/* 互動點對位校準 (配合 2% 視野) */
 .hotspot-bear {
-    top: 48%;
-    left: -2%;
-    /* 把熊熊再往左推一點 */
-    width: 130px;
-    height: 130px;
+    top: 50%;
+    left: 15%;
+    width: 120px;
+    height: 120px;
 }
 
 .hotspot-wall {
-    top: 20%;
-    left: 2%;
+    top: 22%;
+    left: 8%;
     width: 80px;
     height: 80px;
 }
 
 .hotspot-shelf {
-    top: 28%;
-    left: 48%;
-    width: 120px;
-    height: 80px;
+    top: 32%;
+    left: 55%;
+    width: 100px;
+    height: 60px;
 }
 
 .hotspot-desk {
-    top: 46%;
-    left: 80%;
-    width: 120px;
-    height: 120px;
+    top: 50%;
+    left: 85%;
+    width: 110px;
+    height: 110px;
 }
 
-/* 最終解鎖：回憶書發光框 */
+/* 最終解鎖：回憶書發光框 (縮小精密版) */
 .final-notebook-target {
     position: absolute;
-    bottom: 27%;
-    /* 向上對齊桌面 */
-    right: 0%;
-    /* 貼死右邊边缘（因為桌子在右邊） */
-    width: 160px;
-    height: 120px;
+    bottom: 25%;
+    right: 2%;
+    width: 100px;
+    height: 80px;
     cursor: pointer;
     z-index: 25;
     display: flex;
@@ -564,6 +561,18 @@ body {
     align-items: center;
     justify-content: center;
     perspective: 1500px;
+}
+
+.ready.final-notebook-target::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    /* 縮小一點 */
+    height: 90%;
+    border: 2px solid #ffcc33;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #ffcc33;
+    animation: gold-pulse 2s infinite;
 }
 
 .final-notebook-target {
@@ -723,36 +732,37 @@ body {
     transition: all 0.5s ease;
 }
 
-/* 文字區域 (左上 + 中央) */
+/* 文字區域 */
 .page-text-area {
     width: 100%;
-    height: 55%;
+    height: 100%;
+    /* 文字全區分佈 */
     text-align: left;
-    line-height: 2;
+    line-height: 1.8;
     color: #4a403a;
     font-size: 16px;
     font-weight: 500;
     word-break: keep-all;
     overflow-wrap: break-word;
-    text-wrap: balance;
     white-space: pre-line;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1;
 }
 
-/* 照片區域 (加大尺寸) */
+/* 照片區域 (直式 9:16 大小優化) */
 .page-photo-area {
     position: absolute;
-    bottom: 25px;
+    bottom: 30px;
     right: 25px;
-    width: 50%;
-    /* 加大到 50% */
-    height: 35%;
-    /* 高度同步加大 */
-    border-radius: 12px;
+    width: 42%;
+    /* 寬度佔 42% */
+    aspect-ratio: 9/16;
+    /* 鎖定直式 9:16 */
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    border: 4px solid white;
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border: 3px solid white;
+    transition: all 0.7s ease;
+    z-index: 2;
 }
 
 .page-photo-area img {
