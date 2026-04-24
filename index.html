@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>隱藏在房間裡的生日驚喜</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500&family=Noto+Sans+TC:wght@300;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="room-scene">
+        <!-- 房間主背景 (由 CSS 控制) -->
+
+        <!-- 頂部鑰匙狀態欄 -->
+        <div class="header-ui">
+            <div id="photo-album" class="photo-album">
+                <div id="photo-slot-1" class="photo-slot" title="墾丁恆春" onclick="openLevel(1)">?</div>
+                <div id="photo-slot-2" class="photo-slot" title="澎湖船上" onclick="openLevel(2)">?</div>
+                <div id="photo-slot-3" class="photo-slot" title="八三夭演唱會" onclick="openLevel(3)">?</div>
+                <div id="photo-slot-4" class="photo-slot" title="大阪京都" onclick="openLevel(4)">?</div>
+            </div>
+            <div id="progress-text">找回這一年來的 4 片回憶照片...</div>
+        </div>
+
+        <!-- 互動點 (Hotspots) -->
+        <!-- 1. 熊熊 (回憶) -->
+        <div id="hotspot-1" class="hotspot hotspot-bear" onclick="openLevel(1)">
+            <div class="pulse-ring"></div>
+            <span class="label">🧸 回憶</span>
+        </div>
+
+        <!-- 2. 左上牆面 (牆面) -->
+        <div id="hotspot-4" class="hotspot hotspot-wall" style="display: none;" onclick="openLevel(4)">
+            <div class="pulse-ring"></div>
+            <span class="label">🖼️ 牆面</span>
+        </div>
+
+        <!-- 3. 窗左層架 (層架) -->
+        <div id="hotspot-3" class="hotspot hotspot-shelf" style="display: none;" onclick="openLevel(3)">
+            <div class="pulse-ring"></div>
+            <span class="label">� 層架</span>
+        </div>
+
+        <!-- 4. 右側書桌 (桌子) -->
+        <div id="hotspot-2" class="hotspot hotspot-desk" style="display: none;" onclick="openLevel(2)">
+            <div class="pulse-ring"></div>
+            <span class="label">�️ 桌子</span>
+        </div>
+
+        <!-- 5. 最終解鎖：筆記本 (移除翻頁層) -->
+        <div id="final-notebook-area" class="final-notebook-target" style="display: none;"
+            onclick="handleNotebookClick()">
+            <div class="notebook-glow-ring"></div>
+        </div>
+    </div>
+
+    <!-- 彈出視窗 (Modal) -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- 最終驚喜：8 頁回憶卡片書 -->
+    <div id="card-book-overlay" class="card-book-overlay">
+        <!-- 第 0 頁 (封面或動態載入區) -->
+        <div id="book-page" class="book-page-container">
+            <div id="book-page-indicator" class="page-indicator">1 / 8</div>
+            <div id="book-text" class="page-text-area">
+                <!-- 文字填入區 -->
+            </div>
+            <div id="book-photo" class="page-photo-area">
+                <img id="book-img" src="" alt="Memory">
+            </div>
+        </div>
+
+        <!-- 導航按鈕 -->
+        <div class="book-nav">
+            <button class="nav-btn" onclick="prevPage()">PREV</button>
+            <div style="width: 20px;"></div>
+            <button class="nav-btn" onclick="nextPage()">NEXT</button>
+        </div>
+
+        <!-- 退出 (或是關閉) -->
+        <div style="position: absolute; top: 20px; left: 20px;" onclick="closeBook()">
+            <button class="nav-btn" style="width:35px; height:35px; font-size:10px;">ESC</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
